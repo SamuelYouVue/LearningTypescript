@@ -5,7 +5,8 @@ const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
   entry: {
     main: [
-      './src/ts/main.ts'
+      './src/ts/main.ts',
+      './src/js/first.js'
     ]
   },
   devtool: 'inline-source-map',
@@ -52,8 +53,8 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
-  },
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [new TerserPlugin()],
+  // },
 };
