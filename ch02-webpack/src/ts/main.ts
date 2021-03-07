@@ -10,16 +10,15 @@ function showHello(divName: string, name: string) {
   if (elt) {
     elt.innerText = sayHello(name);
     Array.from(array).forEach(($item) => {
-      
-                  elt.innerText += $item;
-    })
+      elt.innerText += $item;
+    });
   }
 }
 
 function component(): HTMLDivElement {
-  const element = document.createElement('div');
+  const element = document.createElement("div");
 
-  element.innerHTML = ['Hello', 'webpack'].join(' ');
+  element.innerHTML = ["Hello", "webpack"].join(" ");
 
   return element;
 }
@@ -27,4 +26,3 @@ function component(): HTMLDivElement {
 document.body.appendChild(component());
 
 showHello("greeting", "TypeScript");
-
