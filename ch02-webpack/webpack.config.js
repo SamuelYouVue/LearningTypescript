@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -10,14 +11,27 @@ module.exports = {
   devtool: 'inline-source-map',
   module: {
     rules: [
+      // {
+      //   test: /\.tsx?$/,
+      //   use: 'ts-loader',
+      //   include: [path.resolve(__dirname, 'src/ts')],
+      //   exclude: /node_modules/,
+      // },
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        include: [path.resolve(__dirname, 'src/ts')],
         exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.js/,
-        exclude: /node_modules/,
+        include: [path.resolve(__dirname, 'src/js')],
+        exclude: [
+          '/node_modules/', 
+          '/webpack.config.babel.js'
+        ],
         use: {
           loader: 'babel-loader',
         },
@@ -37,5 +51,9 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 };
